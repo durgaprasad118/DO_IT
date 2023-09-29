@@ -1,8 +1,8 @@
 import dotenv from 'dotenv'
 dotenv.config()
 import mongoose from 'mongoose'
-const DATABASE_URL = process.env.DATABASE_URL
-console.log(DATABASE_URL)
+const DATABASE_URL = "mongodb+srv://durgaprasadachana1108:dp123456@cluster0.mzrj8ni.mongodb.net/"
+
 const connectToDatabase = async () => {
   try {
     await mongoose.connect(DATABASE_URL, {
