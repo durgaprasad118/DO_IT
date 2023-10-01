@@ -5,13 +5,13 @@ const Signin = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const handleLogin = async () => {
-    const response = await axios.post('https://todo-dp.onrender.com/register', {
+    const response = await axios.post('https://todo-dp.onrender.com/auth/login', {
       username: email,
       password: password,
     })
     let data = response.data
     localStorage.setItem('token', data.token)
-    window.location = '/todos'
+    window.location = '/'
   }
   return (
     <div className="min-h-[calc(100vh-80px)]  px-3 md:py-0  grid ">

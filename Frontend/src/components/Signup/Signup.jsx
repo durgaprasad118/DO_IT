@@ -5,13 +5,12 @@ const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const handleSignup = async () => {
-    const response = await axios.post('https://todo-dp.onrender.com/register', {
+    const response = await axios.post('https://todo-dp.onrender.com/auth/register', {
       username: email,
       password: password,
     })
     let data = response.data
     localStorage.setItem('token', data.token)
-    console.log('hello ji')
     window.location = '/todos'
   }
   return (
