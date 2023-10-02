@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil'
 import { todoListState } from '../../atoms/TodoState'
 const Content = () => {
   const values = useRecoilValue(todoListState)
+  console.log(values);
   return (
     <div className="bg-[#191E24] rounded-xl md:w-3/4 w-full flex flex-col items-center gap-y-3 py-6 overflow-y-scroll h-[550px] px-3">
       {values.map((todo) => {

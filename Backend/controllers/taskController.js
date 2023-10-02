@@ -6,7 +6,8 @@ export const getTasks = async (req, res) => {
     const tasks = await Task.find({ user: userId })
     const user = req.user
     res.status(200).json({
-      tasks,user
+      tasks,
+      user,
     })
   } catch (error) {
     console.error(error)
@@ -16,13 +17,13 @@ export const getTasks = async (req, res) => {
 
 export const createTask = async (req, res) => {
   try {
-    const { title, description ,completed} = req.body
+    const { title, description, completed } = req.body
     const userId = req.user.userId
     // Create a new task associated with the logged-in user
-    const newTask = new Task({ title, description,completed, user: userId })
+    const newTask = new Task({ title, description, completed, user: userId })
     await newTask.save()
 
-    res.status(201).json({ message: 'Task created successfully',newTask })
+    res.status(201).json({ message: 'Task created successfully', newTask })
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Server error' })
@@ -35,9 +36,12 @@ export const updateTask = async (req, res) => {
     const { title, description, completed } = req.body
 
     // Update the task
-    await Task.findByIdAndUpdate(taskId, { title, description, completed })
-
-    res.status(200).json({ message: 'Task updated successfully' })
+    const updatedTask = await Task.findByIdAndUpdate(
+      taskId,
+      { title, description, completed },
+      { new: true },
+    )
+    res.status(200).json({ message: 'Task updated successfully',updatedTask })
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Server error' })

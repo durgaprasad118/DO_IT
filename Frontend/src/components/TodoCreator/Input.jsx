@@ -5,6 +5,7 @@ import axios from 'axios'
 import { todoListState } from '../../atoms/TodoState'
 const Input = () => {
   const [title, setTitle] = useState('')
+  const [todos, setTodos] = useRecoilState(todoListState)
   const config = {
     headers: {
       'Content-type': 'application/json',
@@ -12,16 +13,17 @@ const Input = () => {
     },
   }
   const handleTaskAdd = async () => {
-   const response= await axios.post(
+    const response = await axios.post(
       'https://todo-dp.onrender.com/tasks/createTask',
       {
         title,
       },
       config,
     )
-    console.log(response.data);
+    const newTask = response.data.newTask
+    setTodos([...todos, newTask])
     setTitle('')
-    alert('Task added Successfully!')
+    
   }
 
   return (
