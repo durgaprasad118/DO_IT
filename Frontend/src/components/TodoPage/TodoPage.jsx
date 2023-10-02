@@ -11,7 +11,6 @@ import ItemListFetcher from '../ItemListFetcher/ItemListFetcher'
 const TodoPage = () => {
   ItemListFetcher()
   const values = useRecoilValue(todoListState)
-  console.log(values);
   return (
     <div className="min-h-[calc(100vh-80px)]  flex flex-col relative ">
       <div className="">

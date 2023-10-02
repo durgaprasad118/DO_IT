@@ -5,11 +5,20 @@ const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const handleSignup = async () => {
-    const response = await axios.post('https://todo-dp.onrender.com/auth/register', {
-      username: email,
-      password: password,
-    })
-    let data = response.data
+    try {
+      const response = await axios.post(
+        'https://todo-dp.onrender.com/auth/register',
+        {
+          username: email,
+          password: password,
+        },
+      )
+      let data = response.data
+      // console.log(data.message)
+    } catch (er) {
+      //error message
+      // console.log('ther', er.response.data.message)
+    }
     localStorage.setItem('token', data.token)
     window.location = '/todos'
   }

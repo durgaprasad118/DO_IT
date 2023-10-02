@@ -22,7 +22,7 @@ function ItemListFetcher() {
     }
     fetchData()
   }, [todoList])
-//   console.log(todoList)
+
 }
 
 export default ItemListFetcher
