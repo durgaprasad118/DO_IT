@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
+import { useRecoilState } from 'recoil'
 import axios from 'axios'
+import { todoListState } from '../../atoms/TodoState'
 const Input = () => {
   const [title, setTitle] = useState('')
   const config = {
@@ -10,13 +12,14 @@ const Input = () => {
     },
   }
   const handleTaskAdd = async () => {
-    await axios.post(
+   const response= await axios.post(
       'https://todo-dp.onrender.com/tasks/createTask',
       {
         title,
       },
       config,
     )
+    console.log(response.data);
     setTitle('')
     alert('Task added Successfully!')
   }

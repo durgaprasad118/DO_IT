@@ -16,13 +16,13 @@ export const getTasks = async (req, res) => {
 
 export const createTask = async (req, res) => {
   try {
-    const { title, description } = req.body
+    const { title, description ,completed} = req.body
     const userId = req.user.userId
     // Create a new task associated with the logged-in user
-    const newTask = new Task({ title, description, user: userId })
+    const newTask = new Task({ title, description,completed, user: userId })
     await newTask.save()
 
-    res.status(201).json({ message: 'Task created successfully' })
+    res.status(201).json({ message: 'Task created successfully',newTask })
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Server error' })

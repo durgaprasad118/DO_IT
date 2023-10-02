@@ -1,10 +1,13 @@
 import React from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useSetRecoilState, useRecoilValue } from 'recoil'
+import { userName } from '../../atoms/TodoState'
 import { todoListState } from '../../atoms/TodoState'
 function ItemListFetcher() {
   const todoList = useSetRecoilState(todoListState)
+
+  const setUserName = useSetRecoilState(userName)
   useEffect(() => {
     const fetchData = async () => {
       const axiosConfig = {
@@ -18,11 +21,11 @@ function ItemListFetcher() {
         axiosConfig,
       )
       const data = response.data
-      todoList(data)
+      todoList(data.tasks)
+      setUserName(data.user)
     }
     fetchData()
   }, [todoList])
-
 }
 
 export default ItemListFetcher
