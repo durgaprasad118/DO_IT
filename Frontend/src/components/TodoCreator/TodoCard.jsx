@@ -2,16 +2,30 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { todoListState } from '../../atoms/TodoState'
 import { currentDate } from '../../utils/usegetDate'
+import { PiNumberZeroBold} from 'react-icons/pi';
+import Spinner from '../../utils/Spinner'
 const TodoCard = () => {
-  const todos = useRecoilValue(todoListState)
+  const todos = useRecoilValue(todoListState) ?? 1
+  // method to get the number of values that are done
+  const answer =
+    todos.reduce((acc, curr) => {
+      curr.completed ? acc++ : acc
+      return acc
+    }, 0) ?? 0
+
+  function percentCal(x = 0, y = 1) {
+    return Math.round((x / y) * 100)
+  }
+
+  const percent = percentCal(answer, todos.length)
   return (
     <div className=" md:w-2/3 bg-[#242933] border-2 border-[#7B7B7B] rounded-xl  shadow-2xl flex flex-col  md:flex-row justify-between px-10 md:py-8 gap-2 py-3 items-center">
       <div className="flex flex-col">
         <h1>Todos Done</h1>
-        <h2 className='font-bold md:text-xl'> {currentDate}</h2>
+        <h2 className="font-bold md:text-xl"> {currentDate}</h2>
       </div>
 
-      <div className="stats stats-horizontal  shadow">
+      <div className="stats hidden stats-horizontal  shadow">
         <div className="stat">
           <div className="stat-title">Completed</div>
           <div className="stat-value">{todos.length}</div>
@@ -20,9 +34,16 @@ const TodoCard = () => {
 
         <div className="stat">
           <div className="stat-title"> Total Tasks</div>
-          <div className="stat-value">1,200</div>
+          <div className="stat-value">{2}</div>
           <div className="stat-desc hidden md:block">↘︎ 90 (14%)</div>
         </div>
+      </div>
+
+      <div
+        className="radial-progress text-lg font-bold"
+        style={{ '--value': percent }}
+      >
+        {isNaN(percent) ?(<PiNumberZeroBold/>)  : percent+"%"}
       </div>
     </div>
   )

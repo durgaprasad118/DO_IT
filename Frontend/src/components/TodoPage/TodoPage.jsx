@@ -13,7 +13,7 @@ const TodoPage = () => {
       </div>
       <div className="flex justify-center flex-col items-center">
         <TodoTab></TodoTab>
-        <Content></Content>
+        {/* <Content></Content> */}
       </div>
     </div>
   )

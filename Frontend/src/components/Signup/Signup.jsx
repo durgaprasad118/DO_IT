@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { ErrorToast, Sucesstoast } from '../TodoCreator/toast'
+import Spinner from '../../utils/Spinner'
 const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [signup, setSignup] = useState(false)
   const handleSignup = async () => {
+    setSignup(true)
     try {
       const response = await axios.post(
         'https://todo-dp.onrender.com/auth/register',
@@ -14,13 +18,17 @@ const Signup = () => {
         },
       )
       let data = response.data
-      // console.log(data.message)
+      Sucesstoast('SignedUp Successfully!')
+      setTimeout(() => {
+        window.location.href = '/signin'
+      }, 1000)
     } catch (er) {
-      //error message
-      // console.log('ther', er.response.data.message)
+      ErrorToast(er.response.data.message)
+    } finally {
+      setEmail('')
+      setPassword('')
+      setSignup(false)
     }
-    localStorage.setItem('token', data.token)
-    window.location = '/todos'
   }
   return (
     <div className="min-h-[calc(100vh-80px)] w-full grid ">
@@ -57,7 +65,7 @@ const Signup = () => {
                 onClick={handleSignup}
                 className="btn btn-primary"
               >
-                SignUp
+                {signup ? <Spinner /> : 'Sign Up'}
               </button>
             </div>
             <div className="text-center mt-1">

@@ -6,7 +6,8 @@ import Hero from './components/HeroSection/Hero'
 import Signin from './components/Signin/Signin'
 import Signup from './components/Signup/Signup'
 import TodoPage from './components/TodoPage/TodoPage'
-
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import {
   Route,
   RouterProvider,
@@ -45,6 +46,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RecoilRoot>
       <RouterProvider router={Router} />
+      <ToastContainer></ToastContainer>
     </RecoilRoot>
   </React.StrictMode>,
 )

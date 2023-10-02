@@ -7,15 +7,15 @@ const Hero = () => {
     <div className="hero min-h-[calc(100vh-80px)]">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center md:w-1/2 w-full">
-          {/* <h1 className="text-5xl font-bold">Do IT</h1> */}
+        
           <p className="py-6 text-4xl">
-            Organize and Get Things done Lorem ipsum dolor sit amet consectetur
+           <span className='text-6xl'>Organize and Get Things done</span>  Lorem ipsum dolor sit amet consectetur
             adipisicing elit. 
           </p>
           <Link to="/signup" className="btn btn-accent">Get Started</Link>
         </div>
         <div className=" md:w-1/2 w-full ">
-          <div className="mockup-code md:w-2/3 h-[38vh] bg-[#242933]">
+          <div className="animate-pulse mockup-code md:w-2/3 h-[38vh] bg-[#191E24]">
             <pre
               data-prefix="$"
               className="text-lg"

@@ -6,7 +6,6 @@ import { userName } from '../../atoms/TodoState'
 import { todoListState } from '../../atoms/TodoState'
 function ItemListFetcher() {
   const todoList = useSetRecoilState(todoListState)
-
   const setUserName = useSetRecoilState(userName)
   useEffect(() => {
     const fetchData = async () => {
