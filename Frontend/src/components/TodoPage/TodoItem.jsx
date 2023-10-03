@@ -4,8 +4,8 @@ import axios from 'axios'
 import { useRecoilState } from 'recoil'
 import Modal from '../TodoCreator/Modal'
 import { todoListState } from '../../atoms/TodoState'
-import { toast } from 'react-toastify'
-import { Sucesstoast } from '../TodoCreator/toast'
+
+import { Sucesstoast } from '../../utils/toast'
 import DeleteModal from '../TodoCreator/DeleteModal'
 const TodoItem = ({ title, completed, _id }) => {
   const [tick, setTick] = useState(completed)

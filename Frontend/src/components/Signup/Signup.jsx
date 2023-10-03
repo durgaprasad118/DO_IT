@@ -1,35 +1,17 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
-import { ErrorToast, Sucesstoast } from '../TodoCreator/toast'
 import Spinner from '../../utils/Spinner'
+import { signupUser } from '../../utils/auth' 
+
 const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [signup, setSignup] = useState(false)
-  const handleSignup = async () => {
-    setSignup(true)
-    try {
-      const response = await axios.post(
-        'https://todo-dp.onrender.com/auth/register',
-        {
-          username: email,
-          password: password,
-        },
-      )
-      let data = response.data
-      Sucesstoast('SignedUp Successfully!')
-      setTimeout(() => {
-        window.location.href = '/signin'
-      }, 1000)
-    } catch (er) {
-      ErrorToast(er.response.data.message)
-    } finally {
-      setEmail('')
-      setPassword('')
-      setSignup(false)
-    }
+
+  const handleSignupClick = () => {
+    signupUser(email, password, setEmail, setPassword, setSignup)
   }
+
   return (
     <div className="min-h-[calc(100vh-80px)] w-full grid ">
       <div className="flex items-center justify-center">
@@ -53,7 +35,7 @@ const Signup = () => {
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="text"
+                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="password"
@@ -62,7 +44,7 @@ const Signup = () => {
             </div>
             <div className="form-control mt-5">
               <button
-                onClick={handleSignup}
+                onClick={handleSignupClick}
                 className="btn btn-primary"
               >
                 {signup ? <Spinner /> : 'Sign Up'}

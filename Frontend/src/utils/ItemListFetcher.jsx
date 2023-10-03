@@ -2,8 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
-import { userName } from '../../atoms/TodoState'
-import { todoListState } from '../../atoms/TodoState'
+import { userName } from '../atoms/TodoState'
+import { todoListState } from '../atoms/TodoState'
 function ItemListFetcher() {
   const todoList = useSetRecoilState(todoListState)
   const setUserName = useSetRecoilState(userName)
