@@ -46,11 +46,12 @@ export const signupUser = async (email,name, password, setEmail, setPassword, se
     const data = response.data;
     localStorage.setItem('token', data.token);
     Sucesstoast('SignedUp Successfully');
-    setTimeout(() => {
-      window.location.href = '/signin';
-    }, 1000);
+    
+      window.location.href="/todos";
+   
   } catch (error) {
     ErrorToast(error.response.data.message);
+
   } finally {
     setEmail('');
     setPassword('');

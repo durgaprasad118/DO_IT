@@ -6,9 +6,9 @@ const authMiddleware = (req, res, next) => {
   if (!token) {
     return res.status(401).json({ message: "Authentication failed" });
   }
-
+console.log("conterol reacherd here");
   try {
-    const decodedToken = jwt.verify(token, "secretKey"); // Use the same secret key as in the login controller
+    const decodedToken = jwt.verify(token, "xyz"); // Use the same secret key as in the login controller
     req.user = decodedToken;
     next();
   } catch (error) {
