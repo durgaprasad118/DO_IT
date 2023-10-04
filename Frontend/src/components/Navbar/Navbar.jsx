@@ -2,6 +2,8 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { userName } from '../../atoms/TodoState'
 import ItemListFetcher from '../../utils/ItemListFetcher'
+import { Link } from 'react-router-dom'
+
 const Navbar = () => {
   ItemListFetcher()
   const username = useRecoilValue(userName)
@@ -13,11 +15,21 @@ const Navbar = () => {
         </div>
         <div className="navbar-end flex gap-x-3">
           {username ? (
-            <h1 className="md:text-3xl text-xl font-semibold md:font-bold">
-              {username.username}
-            </h1>
+            <div className='flex gap-x-4'>
+              <h1 className="md:text-3xl text-xl font-semibold md:font-bold">
+                {username.username}
+              </h1>
+              <button
+              onClick={()=>{
+                localStorage.setItem("token",null);
+
+              }}
+              className="btn btn-error">LogOout</button>
+            </div>
           ) : (
-            <button className="btn btn-primary ">logout</button>
+            <Link to="/signin"
+            
+            className="btn btn-primary ">Login</Link>
           )}
         </div>
       </div>

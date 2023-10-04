@@ -64,7 +64,6 @@ export const deleteTask = async (req, res) => {
 
 export const completedTasks = async (req, res) => {
   try {
-    //  const tasks =
   } catch (er) {
     console.log(er)
     res.status(500).json({ message: 'Server Error' })
