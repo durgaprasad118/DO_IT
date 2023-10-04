@@ -35,10 +35,11 @@ export const handleLogin = async (
 
 
 
-export const signupUser = async (email, password, setEmail, setPassword, setSignup) => {
+export const signupUser = async (email,name, password, setEmail, setPassword, setSignup) => {
   setSignup(true);
   try {
     const response = await axios.post('https://todo-dp.onrender.com/auth/register', {
+      name:name,
       username: email,
       password: password,
     });

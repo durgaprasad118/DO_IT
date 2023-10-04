@@ -4,7 +4,7 @@ import User from '../model/User.js'
 const SECRET = 'my-secret-key'
 export const register = async (req, res) => {
   try {
-    const { username, password } = req.body
+    const { username, password,user } = req.body
 
     // Check if the username already exists
     const existingUser = await User.findOne({ username })
@@ -16,7 +16,7 @@ export const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10)
 
     // Create a new user
-    const newUser = new User({ username, password: hashedPassword })
+    const newUser = new User({ username, password: hashedPassword,user })
     await newUser.save()
     const token = jwt.sign({ username, role: 'admin' }, SECRET, {
       expiresIn: '1h',

@@ -1,12 +1,17 @@
 import React from 'react'
-import { useRecoilValue } from 'recoil'
 import { userName } from '../../atoms/TodoState'
 import ItemListFetcher from '../../utils/ItemListFetcher'
-import { Link } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
+import { userState } from '../../store/atoms/user'
+import { useSetRecoilState, useRecoilValue } from 'recoil'
+import { isUserLoading } from '../../store/selectors/isUserLoading'
+import { userEmailState } from '../../store/selectors/userEmail'
 const Navbar = () => {
-  ItemListFetcher()
-  const username = useRecoilValue(userName)
+  const navigate = useNavigate()
+  const userLoading = useRecoilValue(isUserLoading)
+  const userEmail = useRecoilValue(userEmailState)
+  const setUser = useSetRecoilState(userState)
+   
   return (
     <div className="w-full    text-neutral-content sticky z-10  top-0">
       <div className=" navbar h-[80px] bg-opacity-70 backdrop-blur-lg bg-[#353B46]  border-opacity-50 border-b-2 border-[#7B7B7B]   mx-auto  md:px-20 px-3">
@@ -14,22 +19,31 @@ const Navbar = () => {
           <h1 className="text-2xl font-bold">Welcome to DoIT</h1>
         </div>
         <div className="navbar-end flex gap-x-3">
-          {username ? (
-            <div className='flex gap-x-4'>
+          {userEmail ? (
+            <div className="flex gap-x-4">
               <h1 className="md:text-3xl text-xl font-semibold md:font-bold">
-                {username.username}
+                {userEmail}
               </h1>
               <button
-              onClick={()=>{
-                localStorage.setItem("token",null);
-
-              }}
-              className="btn btn-error">LogOout</button>
+                onClick={() => {
+                  localStorage.setItem('token', null)
+                  setUser({
+                    isLoading: false,
+                    userEmail: null,
+                  })
+                }}
+                className="btn btn-error"
+              >
+                LogOout
+              </button>
             </div>
           ) : (
-            <Link to="/signin"
-            
-            className="btn btn-primary ">Login</Link>
+            <Link
+              to="/signin"
+              className="btn btn-primary "
+            >
+              Login
+            </Link>
           )}
         </div>
       </div>
