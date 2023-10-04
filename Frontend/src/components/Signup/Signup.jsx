@@ -9,7 +9,7 @@ const Signup = () => {
   const [signup, setSignup] = useState(false)
   const [name, setName] = useState('')
   const handleSignupClick = () => {
-    signupUser(email,name, password, setEmail, setPassword, setSignup)
+    signupUser(email, name, password, setEmail, setPassword, setSignup)
   }
 
   return (
@@ -18,6 +18,10 @@ const Signup = () => {
         <div className="card flex-shrink-0 w-full max-w-sm border-2 border-[#7B7B7B] rounded-xl shadow-2xl bg-[#242933]">
           <h1 className="text-center text-2xl pt-4">Sign UP</h1>
           <div className="card-body">
+           <form action="submit"
+           onClick={handleSignupClick}
+           >
+            
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -35,7 +39,7 @@ const Signup = () => {
                 <span className="label-text">Email</span>
               </label>
               <input
-                type="text"
+                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="email"
@@ -55,12 +59,13 @@ const Signup = () => {
               />
             </div>
             <div className="form-control mt-5">
-              <button
+              <input type='submit'
                 onClick={handleSignupClick}
                 className="btn btn-primary"
-              >
-                {signup ? <Spinner /> : 'Sign Up'}
-              </button>
+                value="signup"
+             / >
+                {/* {signup ? <Spinner /> : 'Sign Up'} */}
+              
             </div>
             <div className="text-center mt-1">
               <Link
@@ -70,6 +75,7 @@ const Signup = () => {
                 Already Have an Account? Login
               </Link>
             </div>
+            </form> 
           </div>
         </div>
       </div>

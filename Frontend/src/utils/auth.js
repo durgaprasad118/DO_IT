@@ -32,29 +32,34 @@ export const handleLogin = async (
   }
 }
 
-
-
-
-export const signupUser = async (email,name, password, setEmail, setPassword, setSignup) => {
-  setSignup(true);
+export const signupUser = async (
+  email,
+  name,
+  password,
+  setEmail,
+  setPassword,
+  setSignup,
+) => {
+  setSignup(true)
   try {
-    const response = await axios.post('https://todo-dp.onrender.com/auth/register', {
-      name:name,
-      username: email,
-      password: password,
-    });
-    const data = response.data;
-    localStorage.setItem('token', data.token);
-    Sucesstoast('SignedUp Successfully');
-    
-      window.location.href="/todos";
-   
-  } catch (error) {
-    ErrorToast(error.response.data.message);
+    const response = await axios.post(
+      'https://todo-dp.onrender.com/auth/register',
+      {
+        name: name,
+        username: email,
+        password: password,
+      },
+    )
+    const data = response.data
+    localStorage.setItem('token', data.token)
+    Sucesstoast('SignedUp Successfully')
 
+    window.location.href = '/todos'
+  } catch (error) {
+    ErrorToast(error.response.data.message)
   } finally {
-    setEmail('');
-    setPassword('');
-    setSignup(false);
+    setEmail('')
+    setPassword('')
+    setSignup(false)
   }
-};
+}

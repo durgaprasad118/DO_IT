@@ -11,21 +11,21 @@ const Int = () => {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
       })
-      if (response.data.username) {
+      if (response.data) {
         setUser({
           isLoading: false,
-          userEmail: response.data.username,
+          userName: response.data,
         })
       } else {
         setUser({
           isLoading: false,
-          userEmail: null,
+          userName: null,
         })
       }
     } catch (error) {
       setUser({
         isLoading: false,
-        userEmail: false,
+        userName: false,
       })
     }
   }
