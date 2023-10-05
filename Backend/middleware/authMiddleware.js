@@ -9,7 +9,6 @@ const authMiddleware = (req, res, next) => {
   try {
     const decodedToken = jwt.verify(token, 'xyz') // Use the same secret key as in the login controller
     req.user = decodedToken
-    console.log(decodedToken);
     next()
   } catch (error) {
     console.error(error)

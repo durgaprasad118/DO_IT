@@ -6,6 +6,6 @@ import authenticateJwt from '../middleware/authMiddleware.js'
 router.post('/register', register)
 router.post('/login', login)
 router.get('/me', authenticateJwt, (req, res) => {
-  res.json(req.user.user.username)
+  res.json(req.user.user.user)
 })
 export default router
