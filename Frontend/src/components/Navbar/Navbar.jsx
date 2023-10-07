@@ -1,23 +1,13 @@
 import React from 'react'
-import Int from '../../utils/Int'
-import { Link, useNavigate } from 'react-router-dom'
-import { userState } from '../../store/atoms/user'
-import { useSetRecoilState, useRecoilValue } from 'recoil'
-import Spinner from "../../utils/Spinner"
-import { isUserLoading } from '../../store/selectors/isUserLoading'
-import { userNameState } from '../../store/selectors/userEmail'
+import { Link } from 'react-router-dom'
+import Spinner from '../../utils/Spinner'
 import axios from 'axios'
 import { isError, useQuery } from '@tanstack/react-query'
 const Navbar = () => {
-  // const isLoading = useRecoilValue(isUserLoading)
-  // const userName = useRecoilValue(userNameState)
-  // const setUser = useSetRecoilState(userState)
   const fetchData = async () => {
     const { data } = await axios.get('https://todo-dp.onrender.com/auth/me', {
       headers: {
-        Authorization:
-          'Bearer ' +
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXIiOiJEdXJnYVBSYXNhZCIsInVzZXJuYW1lIjoiZHNhZGYiLCJwYXNzd29yZCI6IiQyYSQxMCRIc3doc0RvUmIwM1ZacmMxa3RpQW9PN3Fsb3JnNWJXb2ozY0FqTGdXemZoeWZ5M25SS0JNQyIsIl9pZCI6IjY1MWYxYzlhMGY2ZGUxODUwNTUzZTIyOCIsIl9fdiI6MH0sImlhdCI6MTY5NjUzNzc1NCwiZXhwIjoxNjk2NTQxMzU0fQ.j6ZB4fmF1_7BFE_23e_94GLX6hKjuBTRxPOpdQHgPl4',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
     })
     return data

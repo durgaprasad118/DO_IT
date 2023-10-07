@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
-import { useRecoilState } from 'recoil'
 import axios from 'axios'
 import { todoListState } from '../../atoms/TodoState'
 import { ErrorToast, Sucesstoast } from '../../utils/toast'
 import Spinner from '../../utils/Spinner'
 const Input = () => {
   const [title, setTitle] = useState('')
-  const [todos, setTodos] = useRecoilState(todoListState)
+  const [todos, setTodos] = [] 
   let [r, setR] = useState(false)
   const config = {
     headers: {

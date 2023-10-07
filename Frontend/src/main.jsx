@@ -14,7 +14,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom'
-import { RecoilRoot } from 'recoil'
+import {Provider} from 'react-redux'
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -43,9 +43,9 @@ const Router = createBrowserRouter(
 )
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RecoilRoot>
+    
       <RouterProvider router={Router} />
       <ToastContainer></ToastContainer>
-    </RecoilRoot>
+    
   </React.StrictMode>,
 )

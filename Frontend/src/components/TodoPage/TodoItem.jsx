@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { MdDelete, MdEditCalendar } from 'react-icons/md'
 import axios from 'axios'
-import { useRecoilState } from 'recoil'
 import Modal from '../TodoCreator/Modal'
-import { todoListState } from '../../atoms/TodoState'
 
 import { Sucesstoast } from '../../utils/toast'
 import DeleteModal from '../TodoCreator/DeleteModal'
 const TodoItem = ({ title, completed, _id }) => {
   const [tick, setTick] = useState(completed)
-  const [todos, setTodos] = useRecoilState(todoListState)
+  const [todos, setTodos] =[] 
   const index = todos.findIndex((item) => item._id === _id)
   const deleteTask = async () => {
     const axiosConfig = {

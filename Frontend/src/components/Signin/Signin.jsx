@@ -1,17 +1,38 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { handleLogin } from '../../utils/auth' // Adjust the path as needed
+import { useMutation } from '@tanstack/react-query'
 import Spinner from '../../utils/Spinner'
-
+import axios from 'axios'
 const Signin = () => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loggedIn, setLoggedIn] = useState(false)
-
-  const handleLoginClick = () => {
-    handleLogin(email, password, setLoggedIn, setEmail, setPassword)
+  const postLogin = async ({ username, password }) => {
+    const { data } = await axios.post(
+      'https://todo-dp.onrender.com/auth/login',
+      {
+        username,
+        password,
+      },
+    )
+    return data;
   }
+  const createLoginMutation = useMutation({
+    mutationFn: postLogin,
+    onSuccess: (data) => {
+      localStorage.setItem('token', data.token)
+      console.log(data)
+      navigate("/")
+    },
+  })
 
+  function handleLogin() {
+    createLoginMutation.mutate({
+      username: email,
+      password: password,
+    })
+  }
   return (
     <div className="min-h-[calc(100vh-80px)]  px-3 md:py-0  grid ">
       <div className="flex items-center justify-center">
@@ -44,10 +65,10 @@ const Signin = () => {
             </div>
             <div className="form-control mt-5">
               <button
-                onClick={handleLoginClick}
+                onClick={handleLogin}
                 className="btn btn-primary  "
               >
-                {loggedIn ? <Spinner /> : 'Login'}
+                {createLoginMutation.isLoading ? <Spinner /> : 'Sign in'}
               </button>
             </div>
             <div className="text-center mt-1">

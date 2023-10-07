@@ -1,8 +1,8 @@
 import Task from '../model/Task.js'
 export const getTasks = async (req, res) => {
   try {
-    const userId = req.user.userId
-    // Find tasks associated with the logged-in user
+    const userId = req.user.user._id
+    
     const tasks = await Task.find({ user: userId })
     const user = req.user
     res.status(200).json({
@@ -18,7 +18,8 @@ export const getTasks = async (req, res) => {
 export const createTask = async (req, res) => {
   try {
     const { title, description, completed } = req.body
-    const userId = req.user.userId
+    // console.log(req.user.user._id);
+    const userId = req.user.user._id;
     // Create a new task associated with the logged-in user
     const newTask = new Task({ title, description, completed, user: userId })
     await newTask.save()

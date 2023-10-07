@@ -1,41 +1,52 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Spinner from '../../utils/Spinner'
-import { signupUser } from '../../utils/auth'
+import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [signup, setSignup] = useState(false)
   const [name, setName] = useState('')
-  const handleSignupClick = async (event) => {
-    event.preventDefault()
-    // signupUser(email, name, password, setEmail, setPassword, setSignup)
-    try {
-      const response = await axios.post(
-        'https://todo-dp.onrender.com/auth/register',
-        {
-          user: name,
-          username: email,
-          password: password,
-        },
-      )
-      const data = response.data
-      localStorage.setItem('token', data.token)
-      Sucesstoast('SignedUp Successfully')
-
-      window.location.href = '/todos'
-    } catch (error) {
-      ErrorToast(error.response.data.message)
-    } finally {
-      setEmail('')
-      setPassword('')
-      setSignup(false)
-    }
+  const navigate = useNavigate()
+  const signUPPost = async ({ user, username, password }) => {
+    const { data } = await axios.post(
+      'https://todo-dp.onrender.com/auth/register',
+      {
+        user,
+        username,
+        password,
+      },
+    )
+    return data
   }
+  const signupMutation = useMutation({
+    mutationFn: signUPPost,
+    onSuccess: (data) => {
+      localStorage.setItem('token', data.token)
+     navigate("/todos")
+    },
+  })
+   const handleSignupClick =  (event) => {
+    event.preventDefault();
+    signupMutation.mutate({
+      user:name,
+      username:email,
+      password:password,
+    })
 
+    //   localStorage.setItem('token', data.token)
+    //   Sucesstoast('SignedUp Successfully')
+
+    //   window.location.href = '/todos'
+    // } catch (error) {
+    //   ErrorToast(error.response.data.message)
+    // } finally {
+    //   setEmail('')
+    //   setPassword('')
+    // }
+  }
   return (
-  <div className="min-h-[calc(100vh-80px)] w-full grid ">
+    <div className="min-h-[calc(100vh-80px)] w-full grid ">
       <div className="flex items-center justify-center">
         <div className="card flex-shrink-0 w-full max-w-sm border-2 border-[#7B7B7B] rounded-xl shadow-2xl bg-[#242933]">
           <h1 className="text-center text-2xl pt-4">Sign UP</h1>
@@ -81,12 +92,18 @@ const Signup = () => {
                 />
               </div>
               <div className="form-control mt-5">
-                <button type="submit" className="btn btn-primary">
-                  {signup ? 'Signing Up...' : 'Sign Up'}
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                >
+                  {signupMutation.isLoading ? 'Signing Up...' : 'Sign Up'}
                 </button>
               </div>
               <div className="text-center mt-1">
-                <Link to="/signin" className="link">
+                <Link
+                  to="/signin"
+                  className="link"
+                >
                   Already Have an Account? Login
                 </Link>
               </div>

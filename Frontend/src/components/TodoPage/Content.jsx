@@ -1,11 +1,33 @@
 import React from 'react'
 import TodoItem from './TodoItem'
-import { useRecoilValue } from 'recoil'
-import { todoListState } from '../../atoms/TodoState'
 import Notdo from './Notdo'
+import axios from 'axios'
+
+import { useQuery } from '@tanstack/react-query'
 
 const Content = ({ active }) => {
-  const values = useRecoilValue(todoListState)
+  const fetchData = async () => {
+    const { data } = await axios.get(
+      'https://todo-dp.onrender.com/tasks/getTasks',
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      },
+    )
+    return data
+  }
+
+  const { data, isLoading, isError } = useQuery({
+    queryFn: fetchData,
+    queryKey: ['todos'],
+  })
+  let { tasks } = data || []
+  if (isLoading) {
+    tasks = []
+  }
+
+  const values = [...tasks]
   const toDo = values.filter((x) => x.completed == false)
   const Done = values.filter((x) => x.completed == true)
   const finalArray = active == 'todo' ? toDo : Done

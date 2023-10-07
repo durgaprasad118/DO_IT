@@ -1,11 +1,11 @@
 import React from 'react'
-import { useRecoilValue } from 'recoil'
+
 import { todoListState } from '../../atoms/TodoState'
 import { currentDate } from '../../utils/usegetDate'
 import { PiNumberZeroBold} from 'react-icons/pi';
 import Spinner from '../../utils/Spinner'
 const TodoCard = () => {
-  const todos = useRecoilValue(todoListState) ?? 1
+  const todos = []; 
   // method to get the number of values that are done
   const answer =
     todos.reduce((acc, curr) => {
