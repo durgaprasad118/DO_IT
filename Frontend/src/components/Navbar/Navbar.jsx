@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { updateName } from '../../redux/userSlice'
 const Navbar = () => {
   const [name, setName] = useState(null)
   const navigate = useNavigate()
-   useEffect(() => {
+  const dispatch = useDispatch()
+  useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get('https://todo-dp.onrender.com/auth/me', {
         headers: {
@@ -13,10 +16,11 @@ const Navbar = () => {
       })
       if (data) {
         setName(data)
+        dispatch(updateName(data))
       }
     }
     fetchData()
-  }, [localStorage.getItem("token")])
+  }, [localStorage.getItem('token')])
 
   return (
     <div className="w-full    text-neutral-content sticky z-10  top-0">
