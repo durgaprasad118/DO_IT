@@ -28,7 +28,8 @@ Follow these steps to set up the ToDo App on your local environment:
 1. **Clone the Repository**:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/durgaprasad118/DO_IT.git
+   
    cd Do_IT
    ```
 
