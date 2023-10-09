@@ -2,7 +2,7 @@
 
 - [Do\_IT](#do_it)
   - [Description](#description)
-  - [Table of Contents](#table-of-contents)
+  - [Tech Stack Used](#tech-stack-used)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Features](#features)
@@ -12,7 +12,14 @@
 
 This is a full-stack ToDo application that allows users to create and manage their tasks. Users can register, log in, add, update, mark tasks as done, delete tasks, and see the percentage of completed tasks.
 
-## Table of Contents
+## Tech Stack Used
+
+- **Frontend**: React, Redux, React Query, Axios, Tailwind CSS
+
+- **Backend**: Node.js, Express.js, MongoDB, JSON Web Tokens (JWT) for authentication
+
+- **Others**: react-icons, react-toastify
+
 
 ## Installation
 
@@ -45,7 +52,7 @@ Follow these steps to set up the ToDo App on your local environment:
      - Define the following variables:
 
        ```env
-       PORT= 5901
+       PORT= 3000
        DATABASE_URL=<your-database-url
        SECRET_KEY=<your-secret-key>
        ```
