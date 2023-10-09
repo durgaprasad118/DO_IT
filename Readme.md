@@ -6,7 +6,6 @@
   - [Installation](#installation)
   - [Usage](#usage)
   - [Features](#features)
-  - [Contributing](#contributing)
 
 ## Description
 
@@ -29,7 +28,7 @@ Follow these steps to set up the ToDo App on your local environment:
 
    ```bash
    git clone https://github.com/durgaprasad118/DO_IT.git
-   
+
    cd Do_IT
    ```
 
@@ -113,12 +112,3 @@ Follow these steps to set up the ToDo App on your local environment:
 - Task completion tracking.
 - Dashboard displaying the percentage of completed tasks.
 
-## Contributing
-
-We welcome contributions to improve this project. To contribute, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix: `git checkout -b yourgithubUserName`.
-3. Make your changes and commit them: `git commit -m 'Add feature'`.
-4. Push to your fork: `git push origin feature-name`.
-5. Create a pull request to the `main` branch of the original repository.
