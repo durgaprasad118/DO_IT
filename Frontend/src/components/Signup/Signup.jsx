@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import Spinner from '../../utils/Spinner';
 const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -22,28 +23,16 @@ const Signup = () => {
   const signupMutation = useMutation({
     mutationFn: signUPPost,
     onSuccess: (data) => {
-      localStorage.setItem('token', data.token)
-     navigate("/todos")
+      navigate("/")
     },
   })
-   const handleSignupClick =  (event) => {
-    event.preventDefault();
+  const handleSignupClick = (event) => {
+    event.preventDefault()
     signupMutation.mutate({
-      user:name,
-      username:email,
-      password:password,
+      user: name,
+      username: email,
+      password: password,
     })
-
-    //   localStorage.setItem('token', data.token)
-    //   Sucesstoast('SignedUp Successfully')
-
-    //   window.location.href = '/todos'
-    // } catch (error) {
-    //   ErrorToast(error.response.data.message)
-    // } finally {
-    //   setEmail('')
-    //   setPassword('')
-    // }
   }
   return (
     <div className="min-h-[calc(100vh-80px)] w-full grid ">
@@ -96,7 +85,7 @@ const Signup = () => {
                   type="submit"
                   className="btn btn-primary"
                 >
-                  {signupMutation.isLoading ? 'Signing Up...' : 'Sign Up'}
+                  {signupMutation.isLoading ? (<Spinner/>) : 'Sign Up'}
                 </button>
               </div>
               <div className="text-center mt-1">
