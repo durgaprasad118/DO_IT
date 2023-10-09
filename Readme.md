@@ -11,6 +11,9 @@
 
 This is a full-stack ToDo application that allows users to create and manage their tasks. Users can register, log in, add, update, mark tasks as done, delete tasks, and see the percentage of completed tasks.
 
+[Demo.webm](https://github.com/durgaprasad118/DO_IT/assets/108184152/15159d61-c8d6-4b85-8a0d-3e37bd382220)
+
+
 ## Tech Stack Used
 
 - **Frontend**: React, Redux, React Query, Axios, Tailwind CSS
