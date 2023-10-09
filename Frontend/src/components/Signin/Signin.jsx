@@ -22,8 +22,7 @@ const Signin = () => {
     mutationFn: postLogin,
     onSuccess: (data) => {
       localStorage.setItem('token', data.token)
-      console.log(data)
-      navigate("/")
+      navigate("/todos")
     },
   })
 

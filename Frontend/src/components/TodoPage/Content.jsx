@@ -2,11 +2,13 @@ import React from 'react'
 import TodoItem from './TodoItem'
 import Notdo from './Notdo'
 import axios from 'axios'
-
+import { addTodo } from '../../redux/TodoSlice'
+import { useSelector, useDispatch } from 'react-redux'
 import { useQuery } from '@tanstack/react-query'
 
 const Content = ({ active }) => {
-  const fetchData = async () => {
+  const dispatch = useDispatch()
+  const getTodos = async () => {
     const { data } = await axios.get(
       'https://todo-dp.onrender.com/tasks/getTasks',
       {
@@ -15,19 +17,16 @@ const Content = ({ active }) => {
         },
       },
     )
-    return data
+    return data.tasks
   }
-
-  const { data, isLoading, isError } = useQuery({
-    queryFn: fetchData,
-    queryKey: ['todos'],
+  const query = useQuery({
+    queryFn: getTodos,
+    queryKey: ['asd'],
+    onSuccess: (data) => {
+      dispatch(addTodo(data))
+    },
   })
-  let { tasks } = data || []
-  if (isLoading) {
-    tasks = []
-  }
-
-  const values = [...tasks]
+  const values = useSelector((store) => store.TodoList.todos)
   const toDo = values.filter((x) => x.completed == false)
   const Done = values.filter((x) => x.completed == true)
   const finalArray = active == 'todo' ? toDo : Done

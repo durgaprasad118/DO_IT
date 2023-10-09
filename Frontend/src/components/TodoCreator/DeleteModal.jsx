@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DeleteModal = ({ deleteTask }) => {
+const DeleteModal = ({ deleteTask ,id}) => {
   return (
     <div className="modal modal-bottom sm:modal-middle">
       <div className="modal-box flex  flex-col  items-center gap-y-2">
@@ -10,14 +10,14 @@ const DeleteModal = ({ deleteTask }) => {
 
         <div className="text-center flex gap-x-3 ">
           <label
-            htmlFor="my-modal-5"
+            htmlFor={id}
             className="btn btn-error "
             onClick={() => deleteTask()}
           >
             Delete
           </label>
           <label
-            htmlFor="my-modal-5"
+            htmlFor={id}
             className="btn btn-warning"
             onClick={() => {}}
           >
@@ -29,4 +29,4 @@ const DeleteModal = ({ deleteTask }) => {
   )
 }
 
-export default DeleteModal
+export default DeleteModal;

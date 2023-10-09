@@ -3,15 +3,12 @@ import { FcCheckmark } from 'react-icons/fc'
 import { Link } from 'react-router-dom'
 import { currentDate } from '../../utils/usegetDate'
 const Hero = () => {
-  let current = new Date()
   return (
     <div className="hero min-h-[calc(100vh-80px)]">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center md:w-1/2 w-full">
           <p className="py-6 text-4xl">
-            <span className="text-6xl">Organize and Get Things done</span> Lorem
-            ipsum dolor sit amet consectetur adipisicing elit.
-          </p>
+            <span className="text-6xl ">Organize Your Tasks like a pro</span></p>
           <Link
             to="/signup"
             className="btn btn-accent"
@@ -25,7 +22,7 @@ const Hero = () => {
               data-prefix="$"
               className="text-lg"
             >
-              <code className="border-b-2 border-slate-500">{currentDate}</code>
+              <code className="border-b-2 border-slate-500 font-bold">{currentDate}</code>
             </pre>
             <pre
               data-prefix=""

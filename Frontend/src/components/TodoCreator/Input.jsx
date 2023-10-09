@@ -4,39 +4,46 @@ import axios from 'axios'
 import { todoListState } from '../../atoms/TodoState'
 import { ErrorToast, Sucesstoast } from '../../utils/toast'
 import Spinner from '../../utils/Spinner'
-const Input = () => {
-  const [title, setTitle] = useState('')
-  const [todos, setTodos] = [] 
-  let [r, setR] = useState(false)
-  const config = {
-    headers: {
-      'Content-type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
-  }
-  let message
-  const handleTaskAdd = async () => {
-    setR(true)
-    try {
-      const response = await axios.post(
-        'https://todo-dp.onrender.com/tasks/createTask',
-        {
-          title,
-        },
-        config,
-      )
-      const newTask = response.data.newTask
-      message = response.data.message
 
-      setTodos([...todos, newTask])
-      setTitle('')
-    } catch (er) {
-      console.log(er)
-      ErrorToast(er)
-    } finally {
-      Sucesstoast(message)
-      setR(false)
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useDispatch } from 'react-redux'
+import { add } from '../../redux/TodoSlice'
+const Input = () => {
+  const dispatch = useDispatch()
+  const queryClient = useQueryClient()
+
+  const [title, setTitle] = useState('')
+  const postTodo = async ({ title }) => {
+    const { data } = await axios.post(
+      'https://todo-dp.onrender.com/tasks/createTask',
+      {
+        title,
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      },
+    )
+    return data.newTask
+  }
+  const todoMutation = useMutation({
+    mutationFn: postTodo,
+    onSuccess: (data) => {
+      dispatch(add(data))
+      queryClient.invalidateQueries(['asd'])
+      Sucesstoast("Todo Added Successfully")
+    },
+    onError:(error)=>{
+      ErrorToast(error)
     }
+  })
+
+  function handleCLick() {
+    todoMutation.mutate({
+      title: title,
+    })
+    setTitle('')
   }
 
   return (
@@ -49,11 +56,11 @@ const Input = () => {
         className="input input-bordered md:w-1/2 w-full "
       />
       <button
-        onClick={handleTaskAdd}
-        disabled={r}
+        onClick={handleCLick}
+        disabled={todoMutation.isLoading}
         className="btn btn-primary px-4 "
       >
-        {r ? (
+        {todoMutation.isLoading ? (
           <Spinner></Spinner>
         ) : (
           <AiOutlinePlus className="font-bold text-xl" />

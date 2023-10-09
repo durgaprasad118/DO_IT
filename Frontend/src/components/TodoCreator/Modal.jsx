@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-const Modal = ({ title, updateTask, completed }) => {
+const Modal = ({ title, updateTask, completed, id }) => {
   const [value, SetValue] = useState(title)
   return (
     <div className="modal modal-bottom sm:modal-middle">
@@ -15,7 +15,7 @@ const Modal = ({ title, updateTask, completed }) => {
         />
         <div className="text-center">
           <label
-            htmlFor="my-modal-6"
+            htmlFor={id}
             className="btn btn-primary "
             onClick={() => updateTask(value, completed)}
           >
