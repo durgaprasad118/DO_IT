@@ -2,8 +2,10 @@ import React from 'react'
 import { currentDate } from '../../utils/usegetDate'
 import { PiNumberZeroBold } from 'react-icons/pi'
 import { useSelector } from 'react-redux'
+import { useGettodosQuery } from '../../redux/api/todoApi'
 const TodoCard = () => {
-  const todos = useSelector(store=> store.TodoList.todos)
+  const {data,isLoading,isError}= useGettodosQuery();
+  let todos = isLoading?[]:data.tasks; 
   const userName = useSelector((store) => store.userName.name) ?? '';
   const answer =
     todos.reduce((acc, curr) => {

@@ -3,7 +3,7 @@ import { useState } from 'react'
 const Modal = ({ title, updateTask, completed, id }) => {
   const [value, SetValue] = useState(title)
   return (
-    <div className="modal modal-bottom sm:modal-middle">
+    <div className="modal modal-bottom sm:modal-middle text-black">
       <div className="modal-box flex  flex-col  items-center ">
         <h3 className="font-bold text-lg  text-left">Edit your Task!</h3>
         <input
@@ -17,7 +17,7 @@ const Modal = ({ title, updateTask, completed, id }) => {
           <label
             htmlFor={id}
             className="btn btn-primary "
-            onClick={() => updateTask(value, completed)}
+            onClick={() => updateTask(value,completed)}
           >
             Save
           </label>

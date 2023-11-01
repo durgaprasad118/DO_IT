@@ -4,7 +4,7 @@ const DeleteModal = ({ deleteTask ,id}) => {
   return (
     <div className="modal modal-bottom sm:modal-middle">
       <div className="modal-box flex  flex-col  items-center gap-y-2">
-        <h3 className="font-bold text-lg  text-left">
+        <h3 className="font-bold text-black text-lg  text-left">
           Are you sure to Delete?
         </h3>
 

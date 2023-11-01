@@ -4,41 +4,32 @@ import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../../utils/Spinner';
+import { useRegisterMutation } from '../../redux/api/userApi'
 const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
   const navigate = useNavigate()
-  const signUPPost = async ({ user, username, password }) => {
-    const { data } = await axios.post(
-      'https://todo-dp.onrender.com/auth/register',
-      {
-        user,
-        username,
-        password,
-      },
-    )
-    return data
-  }
-  const signupMutation = useMutation({
-    mutationFn: signUPPost,
-    onSuccess: (data) => {
-      navigate("/")
-    },
-  })
-  const handleSignupClick = (event) => {
+  const [register,{isSuccess,isLoading,isError,error}]= useRegisterMutation();
+  
+  const handleSignupClick = async(event) => {
     event.preventDefault()
-    signupMutation.mutate({
-      user: name,
-      username: email,
-      password: password,
-    })
+   
+    const result = await register({
+      user:name,
+      username:email,
+      password,
+    }) 
+      navigate("/signin")
   }
+  if(isError){
+    ErrorToast(error.data.message)
+ }
   return (
     <div className="min-h-[calc(100vh-80px)] w-full grid ">
       <div className="flex items-center justify-center">
         <div className="card flex-shrink-0 w-full max-w-sm border-2 border-[#7B7B7B] rounded-xl shadow-2xl bg-[#242933]">
-          <h1 className="text-center text-2xl pt-4">Sign UP</h1>
+          <h1 className="text-center text-2xl pt-8 text-white">Sign UP</h1>
           <form onSubmit={handleSignupClick}>
             <div className="card-body">
               <div className="form-control">
@@ -51,7 +42,7 @@ const Signup = () => {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Name"
                   className="input input-bordered"
-                  required // Add the required attribute for validation
+                  required 
                 />
               </div>
               <div className="form-control">
@@ -64,7 +55,7 @@ const Signup = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
                   className="input input-bordered"
-                  required // Add the required attribute for validation
+                  required 
                 />
               </div>
               <div className="form-control">
@@ -77,7 +68,7 @@ const Signup = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
                   className="input input-bordered"
-                  required // Add the required attribute for validation
+                  required
                 />
               </div>
               <div className="form-control mt-5">
@@ -85,7 +76,7 @@ const Signup = () => {
                   type="submit"
                   className="btn btn-primary"
                 >
-                  {signupMutation.isLoading ? (<Spinner/>) : 'Sign Up'}
+                  {isLoading ? (<Spinner/>) : 'Sign Up'}
                 </button>
               </div>
               <div className="text-center mt-1">

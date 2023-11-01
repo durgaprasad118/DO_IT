@@ -1,43 +1,41 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { handleLogin } from '../../utils/auth' // Adjust the path as needed
-import { useMutation } from '@tanstack/react-query'
+import { useLoginMutation } from '../../redux/api/userApi'
 import Spinner from '../../utils/Spinner'
-import axios from 'axios'
+import {ErrorToast} from "../../utils/toast"
 const Signin = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const postLogin = async ({ username, password }) => {
-    const { data } = await axios.post(
-      'https://todo-dp.onrender.com/auth/login',
-      {
-        username,
-        password,
-      },
-    )
-    return data;
-  }
-  const createLoginMutation = useMutation({
-    mutationFn: postLogin,
-    onSuccess: (data) => {
-      localStorage.setItem('token', data.token)
+  const [login,{isSuccess,isLoading,isError,error}]= useLoginMutation();
+  const  handleLogin=async()=> {
+    const result = await login({
+      username:email,
+      password,
+    });
+      localStorage.setItem('token', result.data.token)
       navigate("/todos")
-    },
-  })
+    }
+    if(isError){
+      ErrorToast(error.data.message)
+   }
 
-  function handleLogin() {
-    createLoginMutation.mutate({
-      username: email,
-      password: password,
-    })
+  const onSubmit = async(e)=>{
+    e.preventDefault();
+    await handleLogin()
   }
+  
+  
+  
   return (
     <div className="min-h-[calc(100vh-80px)]  px-3 md:py-0  grid ">
       <div className="flex items-center justify-center">
         <div className="card border-2 border-[#7B7B7B] rounded-xl  flex-shrink-0 w-full max-w-sm shadow-2xl bg-[#242933]">
           <h1 className="text-center text-2xl pt-4">Sign IN</h1>
           <div className="card-body">
+ <h1 className="text-2xl   text-white text-center">
+              Login to your account
+            </h1>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -64,10 +62,10 @@ const Signin = () => {
             </div>
             <div className="form-control mt-5">
               <button
-                onClick={handleLogin}
+                onClick={onSubmit}
                 className="btn btn-primary  "
               >
-                {createLoginMutation.isLoading ? <Spinner /> : 'Sign in'}
+                {isLoading ? <Spinner /> : 'Sign in'}
               </button>
             </div>
             <div className="text-center mt-1">
