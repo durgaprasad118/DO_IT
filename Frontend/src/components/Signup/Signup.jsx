@@ -79,7 +79,7 @@ const Signup = () => {
                   {isLoading ? (<Spinner/>) : 'Sign Up'}
                 </button>
               </div>
-              <div className="text-center mt-1">
+              <div className="text-center mt-1 text-white">
                 <Link
                   to="/signin"
                   className="link"
