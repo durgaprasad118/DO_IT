@@ -70,7 +70,7 @@ const TodoItem = ({ title, completed, _id }) => {
     })
   }
   return (
-    <div className="grid grid-cols-6  h-auto md:w-3/4 w-full  grid-rows-2 md:grid-rows-1  card bg-[#242933] rounded-box place-items-center border-opacity-50 border-2 border-[#7B7B7B] md:px-2 py-2 ">
+    <div className="grid text-white grid-cols-6  h-auto md:w-3/4 w-full  grid-rows-2 md:grid-rows-1  card  rounded-box place-items-center border-opacity-50 border-2 border-[#7B7B7B] md:px-2 py-2 ">
       <input
         type="checkbox"
         checked={completed}
@@ -79,7 +79,7 @@ const TodoItem = ({ title, completed, _id }) => {
           updateTASK(TITLE, answer)
           setTick(answer)
         }}
-        className="checkbox text-left"
+        className="checkbox text-left border border-white"
       />
       <h1 className="text-lg col-start-2 md:col-end-5 col-end-7">{title}</h1>
       <div className="flex gap-x-2 col-start-1 col-end-7 md:col-start-5 md:col-end-7 ">

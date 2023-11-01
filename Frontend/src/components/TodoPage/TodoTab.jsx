@@ -9,15 +9,15 @@ const TodoTab = () => {
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
-      <div className="tabs tab-lg tabs-boxed rounded-none rounded-t-lg">
+      <div className="tabs  tabs-boxed ">
         <a
-          className={`tab tab-lg ${activeTab === 'todo' && 'tab-active'}`}
+          className={`tab   ${activeTab === 'todo' && 'tab-active'}`}
           onClick={() => handleTabClick('todo')}
         >
           ToDo
         </a>
         <a
-          className={`tab tab-lg ${activeTab === 'completed' && 'tab-active'}`}
+          className={`tab  ${activeTab === 'completed' && 'tab-active'}`}
           onClick={() => handleTabClick('completed')}
         >
           Completed

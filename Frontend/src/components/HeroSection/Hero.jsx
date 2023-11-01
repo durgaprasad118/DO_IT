@@ -8,7 +8,7 @@ const Hero = () => {
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center md:w-1/2 w-full">
           <p className="py-6 text-4xl">
-            <span className="text-6xl ">Organize Your Tasks like a pro</span></p>
+            <span className="text-6xl text-white ">Organize Your Tasks like a pro</span></p>
           <Link
             to="/signup"
             className="btn btn-accent"

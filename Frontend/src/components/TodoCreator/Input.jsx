@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import axios from 'axios'
-import { todoListState } from '../../atoms/TodoState'
 import { ErrorToast, Sucesstoast } from '../../utils/toast'
 import Spinner from '../../utils/Spinner'
 
